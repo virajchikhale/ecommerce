@@ -11,7 +11,7 @@ $cont=mysql_num_rows($result);
 
         // echo $sql;
 if($cont>=1) {
-        $_SESSION['user'] = "$email";
+        $_SESSION['user'] = $email;
         echo $email;
         }
 else{

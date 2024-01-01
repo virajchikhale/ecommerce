@@ -80,30 +80,31 @@
 	<script >
 
 		function response() {
-        var email = $('#email').val();
-        var password = $('#pass').val();
-		var	table='admin_reg';
-		// alert(email);
-		$.ajax({
-        type:'POST',
-        url:'../../sqloperations/login.php',
-        data:{email:email,
-			password:password,
-			table:table
-		},
-        success:function(return_data) {
-			// alert(return_data);
-          if(return_data == "1"){
-			alert("Incorrect Usewrname or Password");
-			$('#pass').val('');
-			$('#pass').focus();
-          }  else{ 
-				alert("Logedin successfully")
-				window.location.href='../hod';
-          } 
-        }
-      });
-	}
+			var email = $('#email').val();
+			var password = $('#pass').val();
+			var	table='admin_reg';
+			// alert(email);
+			$.ajax({
+			type:'POST',
+			url:'../../sqloperations/login.php',
+			data:{email:email,
+				password:password,
+				table:table
+			},
+			success:function(return_data) {
+				// alert(return_data);
+			if(return_data == "1"){
+				alert("Incorrect Usewrname or Password");
+				$('#pass').val('');
+				$('#pass').focus();
+			}  else{ 
+					alert("Logedin successfully");
+					window.location.href='../dashboard/index.php';
+			} 
+			}
+		});
+		}
+
 	</script>
 	<script src="../../includes/js/main.js"></script>
 <!--===============================================================================================-->

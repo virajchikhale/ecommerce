@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+
+session_start();
+?><!DOCTYPE html>
 <html dir="ltr" lang="en">
 
 <head>
@@ -10,7 +13,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../src/assets/images/favicon.png">
-    <title>Adminmart Template - The Ultimate Multipurpose admin template</title>
+    <title>Admin Add Product</title>
     <!-- This page css -->
     <!-- Custom CSS -->
 	<link href="../src/assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
@@ -115,14 +118,19 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
+                        <div class="col-md-12 text-center">
+                            <?php
+                                include ('../../includes/connection.php');	
+                                $ur = mysql_fetch_array(mysql_query("select * from admin_reg where email='".$_SESSION["user"]."'"));
+                            ?>
+                            <h4 class="name"><?php echo  ucfirst($ur['first_name'])."  ".ucfirst($ur['last_name']);?></h4>
+                            <a href="../login" ><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Sign out</a>
+                        </div>
+                        <br>
                         <li class="nav-small-cap"><span class="hide-menu">Products</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="pro_report.php"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="index.php"
                         aria-expanded="false"><i data-feather="bar-chart-2" class="feather-icon"></i>
 							<span class="hide-menu">Product Report</span></a>
-						</li>
-						<li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="docs-start.html"
-                        aria-expanded="false"><i data-feather="clipboard" class="feather-icon"></i>
-							<span class="hide-menu">Add Product</span></a>
 						</li>
                         <li class="list-divider"></li>
                     </ul>
