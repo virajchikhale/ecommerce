@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Sign-In</title>
+
+    <!-- Icons font CSS-->
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="css/main.css" rel="stylesheet" media="all">
+</head>
+
+<body onload=disable()>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Admin Sign-In</h2>
+                    <form method="POST">
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">first name</label>
+                                    <input class="input--style-4" type="text" name="fname" id="fname">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">last name</label>
+                                    <input class="input--style-4" type="text" name="lname" id="lname">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Email</label>
+                                    <input onchange=emailvalid(this.value) class="input--style-4" type="email" name="email" id="email">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Phone Number</label>
+                                    <input  onchange=checkmobno() class="input--style-4" type="text" name="phone" id="phone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group">
+                                <label class="label">Password</label>
+                                <input onchange=passvalid() class="input--style-4" type="password" name="password" id="password">
+                            </div>
+                            <div class="input-group">
+                                <label class="label">Confirm Password</label>
+                                <input onchange=passcon() class="input--style-4" type="password" name="cpassword" id="cpassword">
+                            </div>
+                            <div class="input-group" id="otppp">
+                                <label class="label">OTP</label>
+                                <input  onchange=otp() onkeyup=otp1() class="input--style-4" type="password" name="otp" id="otp">
+                            </div>
+                        </div>
+                        <div class="p-t-15">
+                            <button onclick=response() class="btn btn--radius-2 btn--blue" type="button" id="submit">Signin</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script> 
+
+        function checkmobno() {
+            var mob = $('#phone').val();
+            //alert(mob);
+            $.ajax({
+            type:'POST',
+            url:'../../validation/checkmob.php',
+            data:{mob:mob,table:'hod_reg'},
+            success:function(return_data) {
+                if(return_data == 1){
+                alert('This Number already exist in system');
+                $('#phone').val('');
+                $('#phone').focus();
+                }   //	alert(return_data);      
+            }
+            });
+        }
+    
+        function emailvalid(str) {
+          var email = $('#email').val();
+          //alert(email);
+          $.ajax({
+            type:'POST',
+            url:'../../validation/emailvalid.php',
+            data:{email:email,
+                type:'reg',
+                table:'admin_reg'
+            },
+            success:function(return_data) {
+                //alert(return_data);
+              if(return_data == "1"){
+                alert('This Email already exist in system');
+                $('#email').val('');
+                $('#email').focus();
+              }  else{
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    }
+                    xmlhttp.open("GET", "../../email/email_base.php?q="+str+"&otp="+return_data+"&type=reg_otp&position=hod", true);
+                    xmlhttp.send();
+                    //alert(return_data);
+                alert('We have sent OTP to '+str);
+                otp = return_data;
+                
+                var y = document.getElementById("otppp");
+                y.style.display = "block";
+                
+                //alert(otp);
+              }   
+            }
+          });
+        }
+    
+        function response() {
+    
+            
+            var fname = $('#fname').val();
+            var lname = $('#lname').val();
+            var email = $('#email').val();
+            var phoneno = $('#phone').val();
+            var password = $('#password').val();
+            var	table='admin_reg';
+                
+            
+            $.ajax({
+                type:'POST',
+                url:'../../sqloperations/insert_reg.php',
+                data:{fname:fname,
+                    lname:lname,
+                    email:email,
+                    phoneno:phoneno,
+                    password:password,
+                    table:table
+                },
+                success:function(return_data) {
+                    // alert(return_data);
+                if(return_data == "1"){
+                    alert('Someting went wrong!!!');
+                }  else{
+    
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        }
+                        xmlhttp.open("GET", "../../email/email_base.php?q="+email+"&type=thanks&position=hod", true);
+                        xmlhttp.send();
+                        alert('Signed Up Successfully....');
+                        window.location.href='../login';
+                } 
+                }
+            });
+            }
+    
+        </script>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/datepicker/moment.min.js"></script>
+    <script src="vendor/datepicker/daterangepicker.js"></script>
+	<script src="../../includes/js/validation.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->
