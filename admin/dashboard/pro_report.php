@@ -161,7 +161,9 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
 
-            <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#add_pro"><i class="far fa-plus" style="color:rgb(10,10,10)"></i>Add Product</a>
+
+
+
             <!-- add product model -->
             <div class="modal fade" id="add_pro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -204,6 +206,11 @@
 								<div class="col-md-12">
 									<div class="card shadow-sm">
 										<div class="p-4 text-center">
+                                            <div class="col-md-12 text-center">
+                                                <div class="form-group">
+                                                    <a class="btn btn-lg btn-info" data-toggle="modal" data-target="#add_pro"  style="color:white"><i class="far fa-plus" style="color:rgb(0,0,0)"></i>Add Product</a>
+                                                </div>
+                                            </div>
 											<div class="table-responsive">
 			                                    <table id="zero_config" class="table table-striped table-bordered no-wrap">
 			                                        <thead>
@@ -326,6 +333,7 @@
                                                         </div>
 
 
+                                                        <!-- Delete model -->
                                                         <div class="modal fade" id="deleteModal_<?php echo $row['id'];?>"tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
@@ -365,11 +373,12 @@
                                                                 }
                                                                 $name=$_POST['name'];
                                                                 $img=$file_name;
+                                                                $type=$_POST['type'];
                                                                 $oprise=$_POST['oprise'];
                                                                 $dprise=$_POST['dprise'];
                                                                 $description=$_POST['description'];
                                                                 $quantity=$_POST['quantity'];
-                                                                $que="UPDATE `products` SET `name`='".$name."',`img`='".$img."',`oprise`='".$oprise."',`dprise`='".$dprise."',`description`='".$description."',`quantity`='".$quantity."'  WHERE id='".$row['id']."'" ;
+                                                                $que="UPDATE `products` SET `name`='".$name."', `type`='".$type."',`img`='".$img."',`oprise`='".$oprise."',`dprise`='".$dprise."',`description`='".$description."',`quantity`='".$quantity."'  WHERE id='".$row['id']."'" ;
                                                                 mysql_query($que);
                                                                 echo "<script> alert('Crop data updated Successfully....');</script>";
                                                                 echo '<script>window.location.href="my-products.php";</script>';
@@ -384,9 +393,34 @@
                                                             }
 
                                                         $id++; }
-                                                        ?>
-                                                    <?php
+
                                                     echo "Number of products: " . mysql_num_rows($res) ;
+
+                                                    
+                                                    if(isset($_POST['add_pro']))
+                                                    {		
+
+                                                        if(isset($_FILES['img'])){
+                                                            echo "<pre>";
+                                                            print_r($_FILES);
+                                                            echo "</pre>";
+                                                            $rand = (rand(1,999999));
+                                                            $file_name = $rand.$_FILES['img']['name'];
+                                                            $file_tmp = $_FILES['img']['tmp_name'];
+                                                            move_uploaded_file($file_tmp,"../images/products/".$file_name);
+                                                        }
+                                                        $name=$_POST['name'];
+                                                        $img=$file_name;
+                                                        $type=$_POST['type'];
+                                                        $oprise=$_POST['oprise'];
+                                                        $dprise=$_POST['dprise'];
+                                                        $description=$_POST['description'];
+                                                        $quantity=$_POST['quantity'];
+                                                        $que="Insert into products(name, img, type, oprise, dprise, description, quantity) values('".$name."' , '".$img."', '".$type."', '".$oprise."', '".$dprise."', '".$description."', '".$quantity."')";
+                                                        mysql_query($que);
+                                                        echo "<script> alert('Crop data updated Successfully....');</script>";
+                                                        echo '<script>window.location.href="my-products.php";</script>';
+                                                    }
                                                         ?>
 			                                        </tbody>
 			                                        <tfoot>
