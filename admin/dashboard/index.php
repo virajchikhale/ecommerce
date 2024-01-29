@@ -188,6 +188,7 @@ session_start();
                     
                                 <div class="form-group mb-3">
                                 <label for="">Name</label><input type="text" name="name" class="form-control" >
+                                <label for="">Category</label><input type="text" name="category" class="form-control" >
                                 <label for="">Type</label><input type="text" name="type" class="form-control" >
                                 <label for="">Orignal Prise</label><input type="text" name="oprise" class="form-control" >
                                 <label for="">Discounted Prise</label><input type="text" name="dprise" class="form-control" >
@@ -226,6 +227,7 @@ session_start();
 			                                                <th>Action</th>
 			                                                <th>ID</th>
 			                                                <th>Name</th>
+			                                                <th>Category</th>
 			                                                <th>Type</th>
 			                                                <th>Orignal Prise</th>
 			                                                <th>Discounted Prise</th>
@@ -258,6 +260,7 @@ session_start();
                                                         </th>
                                                         <td><?php echo $id;?></td>
                                                         <td><?php echo $row['name']; ?></td>
+                                                        <td><?php echo $row['category']; ?></td>
                                                         <td><?php echo $row['type']; ?></td>
                                                         <td><?php echo $row['oprise']; ?></td>
                                                         <td><?php echo $row['dprise']; ?></td>	
@@ -289,7 +292,7 @@ session_start();
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <img src="../images/products/<?php echo $results['img']; ?>" class="rounded" alt="<?php echo $results['img']; ?>" style="width:100%;">
+                                                                        <img src="../../images/products/<?php echo $results['img']; ?>" class="rounded" alt="<?php echo $results['img']; ?>" style="width:100%;">
                                                                     </div> 
                                                                 </div>
                                                             </div>
@@ -415,18 +418,19 @@ session_start();
                                                             $rand = (rand(1,999999));
                                                             $file_name = $rand.$_FILES['img']['name'];
                                                             $file_tmp = $_FILES['img']['tmp_name'];
-                                                            move_uploaded_file($file_tmp,"../images/products/".$file_name);
+                                                            move_uploaded_file($file_tmp,"../../images/products/".$file_name);
                                                         }
                                                         $name=$_POST['name'];
                                                         $img=$file_name;
+                                                        $category=$_POST['category'];
                                                         $type=$_POST['type'];
                                                         $oprise=$_POST['oprise'];
                                                         $dprise=$_POST['dprise'];
                                                         $description=$_POST['description'];
                                                         $quantity=$_POST['quantity'];
-                                                        $que="Insert into products(name, img, type, oprise, dprise, description, quantity) values('".$name."' , '".$img."', '".$type."', '".$oprise."', '".$dprise."', '".$description."', '".$quantity."')";
+                                                        $que="Insert into products(name, img,category, type, oprise, dprise, description, quantity, aid) values('".$name."' , '".$img."', '".$category."', '".$type."', '".$oprise."', '".$dprise."', '".$description."', '".$quantity."','".$ur['id']."')";
                                                         mysql_query($que);
-                                                        echo "<script> alert('Crop data updated Successfully....');</script>";
+                                                        echo "<script> alert('Product data updated Successfully....');</script>";
                                                         echo '<script>window.location.href="my-products.php";</script>';
                                                     }
                                                         ?>
@@ -436,6 +440,7 @@ session_start();
 			                                                <th>Action</th>
 			                                                <th>ID</th>
 			                                                <th>Name</th>
+			                                                <th>Category</th>
 			                                                <th>Type</th>
 			                                                <th>Orignal Prise</th>
 			                                                <th>Discounted Prise</th>
