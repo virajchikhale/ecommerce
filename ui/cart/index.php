@@ -79,17 +79,17 @@ session_start();
 	
     <?php
         
-		include('../includes/connection.php');
+		include('../../includes/connection.php');
 		if(isset($_POST['submit'])){
 			$user=$_POST['email'];
-			$pass=md5($_POST['password']);
-			$sql="SELECT * FROM `customer_reg` WHERE `email`='".$user."' AND `password`='".$pass."'";
+			$pass=$_POST['password'];
+			$sql="SELECT * FROM `farmer_reg` WHERE `email`='".$user."' AND `password`='".$pass."'";
 			$result=mysql_query($sql);
             $cont=mysql_num_rows($result);
             //echo $sql;
 			if($cont>=1){
 					   echo "<script> alert('Logged in Successfully....'); </script>";
-					    echo "<script> window.location.href='home.php'; </script>";
+					    echo "<script> window.location.href='shop.php'; </script>";
 					}
 					else{
 						echo "<script> alert('Plese check password and username....'); </script>";
