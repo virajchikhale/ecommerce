@@ -155,7 +155,7 @@ session_start();
                     <div class="ml-auto">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb m-0 p-0">
-                                <li class="breadcrumb-item text-muted active" aria-current="page">AdminMart</li>
+                                <li class="breadcrumb-item text-muted active" aria-current="page">Admin</li>
                                 <li class="breadcrumb-item text-muted" aria-current="page">Product Report</li>
                             </ol>
                         </nav>
@@ -177,7 +177,7 @@ session_start();
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">ADD PRODUCT FOR SEAL</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">ADD PRODUCT FOR SELL</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -199,7 +199,7 @@ session_start();
 
                                 </div>
                                 <div class="form-group mb-3">
-                                <button type="submit" name="add_pro" class="btn btn-success">Add</button>
+                                    <button type="submit" name="add_pro" class="btn btn-success">Add</button>
                                 </div>
 
                             </form>

@@ -1,10 +1,4 @@
-<?php
-$sql = "select * from `customer_reg` where email='".$_SESSION["user"]."'";
-$ur = mysql_fetch_array(mysql_query($sql));
-$sql1 = "select * from `cart` where cid='".$ur['id']."'";
-$result=mysql_query($sql1);
-$cont=mysql_num_rows($result);
-?>
+
 <div class="container-fluid">
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">

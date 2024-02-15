@@ -1,27 +1,31 @@
-class Company(object):
+class Manager:
 
-    x = 10
+    def project(self):
 
-    def __init__(self, compName, loc):
+        print("In project: Manager")
 
-        print("In Constructor")
-
-        self.compName = compName
-
-        self.loc = loc
-
-    def compInfo(self):
-
-        print(self.compName)
-
-        print(self.loc)
-
-class Employee(Company):
+class TeamLead1(Manager):
 
     pass
 
-obj1 = Employee("Microsoft", "Pune")
+class TeamLead2(Manager):
 
-obj2 = Company("Microsoft", "Banglore")
+   
 
-obj1.compInfo()
+    def project(self):
+
+        print("In project: TeamLead2")
+
+class Developer(TeamLead1, TeamLead2):
+
+    '''
+
+    def project(self):
+
+        print("In project: Developer")
+
+    '''
+
+obj = Developer()
+
+obj.project()

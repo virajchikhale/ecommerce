@@ -7,7 +7,12 @@ if($_SESSION["user"]==""){
   echo '<script>window.location.href="index.php";</script>';
 }
 
-        ?>
+$sql = "select * from `customer_reg` where email='".$_SESSION["user"]."'";
+$ur = mysql_fetch_array(mysql_query($sql));
+$sql1 = "select * from `cart` where cid='".$ur['id']."'";
+$result=mysql_query($sql1);
+$cont=mysql_num_rows($result);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -249,7 +254,6 @@ if($_SESSION["user"]==""){
         <div class="row px-xl-5 pb-3">
             
         <?php
-        $ur = mysql_fetch_array(mysql_query("select * from admin_reg where email='".$_SESSION["user"]."'"));
         $res = mysql_query("select * from products");
         $id = 1;
         while($row = mysql_fetch_array($res))
@@ -267,12 +271,41 @@ if($_SESSION["user"]==""){
                         </div>
                     </div>
                     <input type=hidden id="pro_id_<?php echo $row['id']; ?>" value="<?php echo $row['id']; ?>">
+                    <input type=hidden id="co_id_<?php echo $row['id']; ?>" value="<?php echo $ur['id']; ?>">
                     <div class="card-footer d-flex justify-content-between bg-light border">
                         <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                        <a onclick=addtocart() class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                        <a onclick=addtocart_<?php echo $row['id']; ?>() class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                     </div>
                 </div>
             </div>
+
+            
+    <script>
+
+        function addtocart_<?php echo $row['id']; ?>(){
+        var pid = $('#pro_id_<?php echo $row['id']; ?>').val();
+        var cid = $('#co_id_<?php echo $row['id']; ?>').val();
+        var quan = "1";
+
+        	$.ajax({
+            type:'POST',
+            url:'../sqloperations/insert_reg.php',
+            data:{pid:pid,
+        		cid:cid,
+        		quan:quan
+        	},
+            success:function(return_data) {
+        		//alert(return_data);
+              if(return_data == "1"){
+                alert('Someting went wrong!!!');
+              }  else{
+                alert('Item Added Successfully');
+				window.location.href='home.php'; 
+              } 
+            }
+          });
+        }
+        </script>
         
 <?php
 $id++; }
@@ -311,50 +344,7 @@ $id++; }
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-    <script>
-
-        function addtocart(){
-        var fname = $('#fname').val();
-        var lname = $('#lname').val();
-        var email = $('#email').val();
-        var phoneno = $('#phoneno').val();
-        var password = $('#password').val();
-        var department = $('#department').val();
-        var report_to = $('#report_to').val();
-		var	table='teacher_reg';
-		
-		$.ajax({
-        type:'POST',
-        url:'../sqloperations/insert_reg.php',
-        data:{fname:fname,
-			lname:lname,
-			email:email,
-			phoneno:phoneno,
-			password:password,
-			department:department,
-			report_to:report_to,
-			table:table
-		},
-        success:function(return_data) {
-			//alert(return_data);
-          if(return_data == "1"){
-            alert('Someting went wrong!!!');
-          }  else{
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                }
-                xmlhttp.open("GET", "../email/email_base.php?q="+email+"&type=thanks&position=teacher", true);
-                xmlhttp.send(); 
-				alert('Signed Up Successfully....');
-				window.location.href='index.php';
-          } 
-        }
-      });
-        }
-        // mahesh lavdya
-    </script>
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
