@@ -7,18 +7,13 @@ if($_SESSION["user"]==""){
   echo '<script>window.location.href="index.php";</script>';
 }
 
-$sql = "select * from `customer_reg` where email='".$_SESSION["user"]."'";
-$ur = mysql_fetch_array(mysql_query($sql));
-$sql1 = "select * from `cart` where cid='".$ur['id']."'";
-$result=mysql_query($sql1);
-$cont=mysql_num_rows($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>EShopper</title>
+    <title>Home</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">

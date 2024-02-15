@@ -2,7 +2,7 @@
 include('../includes/connection.php');
 
 $cid=$_POST['cid'];
-$quantity=$_POST['quantity'];
+$quantity=$_POST['quan'];
 $pid=$_POST['pid'];
 
 $sqlinsert="insert into cart(cid, quantity, pid) 

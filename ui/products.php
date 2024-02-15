@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-    
-<?php
-    include ('../includes/connection.php');
+<?php 
+        include ('../includes/connection.php');
+        
+session_start();
+if($_SESSION["user"]==""){
+  echo "<script> alert('Please login....');</script>";
+  echo '<script>window.location.href="index.php";</script>';
+}
     $category = $_GET['category']; 
     $type = $_GET['type']; 
     ?>
 
 <head>
     <meta charset="utf-8">
-    <title><?php echo ucfirst($type);?>'s</title>
+    <title><?php if($type=='*'){echo  ucfirst($category);}else{echo  ucfirst($type);}?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -31,34 +36,9 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Topbar Start -->
-    <div class="container-fluid">
-        <div class="row align-items-center py-3 px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
-                <a href="" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
-                </a>
-            </div>
-            <div class="col-lg-6 col-6 text-left">
-                <form action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
-                        <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-3 col-6 text-right">
-                <a href="" class="btn border">
-                    <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">0</span>
-                </a>
-            </div>
-        </div>
-    </div>
+    <!-- Topbar Start -->    
+    <?php include('topbar.php');?>
+
     <!-- Topbar End -->
 
 
@@ -203,7 +183,6 @@
             <div class="col-lg-9 col-md-12">
                 <div class="row pb-3">
                             <?php
-                            $ur = mysql_fetch_array(mysql_query("select * from admin_reg where email='".$_SESSION["user"]."'"));
                             if($type=="*"){
                                 $res = mysql_query("select * from products where category='".$category."'");
                             }else{
@@ -224,13 +203,41 @@
                                                 <h6><?php echo $row['dprise']; ?></h6><h6 class="text-muted ml-2"><del><?php echo $row['oprise']; ?></del></h6>
                                             </div>
                                         </div>
+                                        <input type=hidden id="pro_id_<?php echo $row['id']; ?>" value="<?php echo $row['id']; ?>">
+                                        <input type=hidden id="co_id_<?php echo $row['id']; ?>" value="<?php echo $ur['id']; ?>">
                                         <div class="card-footer d-flex justify-content-between bg-light border">
                                             <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                                            <a onclick=addtocart_<?php echo $row['id']; ?>() class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                                         </div>
                                     </div>
                                 </div>
-                            
+    <script>
+
+        function addtocart_<?php echo $row['id']; ?>(){
+        var pid = $('#pro_id_<?php echo $row['id']; ?>').val();
+        var cid = $('#co_id_<?php echo $row['id']; ?>').val();
+        var quan = "1";
+
+        		// alert(cid);
+        	$.ajax({
+            type:'POST',
+            url:'../sqloperations/insert_reg.php',
+            data:{pid:pid,
+        		cid:cid,
+        		quan:quan
+        	},
+            success:function(return_data) {
+        		//alert(return_data);
+              if(return_data == "1"){
+                alert('Someting went wrong!!!');
+              }  else{
+                alert('Item Added Successfully');
+				window.location.href='cart.php'; 
+              } 
+            }
+          });
+        }
+        </script>
                     <?php
                     $id++; }
                     ?>
