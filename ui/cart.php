@@ -37,12 +37,12 @@ if($_SESSION["user"]==""){
 <body>
     <!-- Topbar Start --><?php
         include ('../includes/connection.php');
-$sql = "select * from `customer_reg` where email='".$_SESSION["user"]."'";
-$ur = mysql_fetch_array(mysql_query($sql));
-$sql1 = "select * from `cart` where cid='".$ur['id']."'";
-$result=mysql_query($sql1);
-$cont=mysql_num_rows($result);
-?>
+        $sql = "select * from `customer_reg` where email='".$_SESSION["user"]."'";
+        $ur = mysql_fetch_array(mysql_query($sql));
+        $sql1 = "select * from `cart` where cid='".$ur['id']."'";
+        $result=mysql_query($sql1);
+        $cont=mysql_num_rows($result);
+        ?>
 <div class="container-fluid">
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
@@ -56,7 +56,7 @@ $cont=mysql_num_rows($result);
                 <h6><?php echo ucfirst($ur["fname"])." ".ucfirst($ur["lname"]);?></h6>
             </div>
             <div class="col-lg-1 col-6 text-right">
-                <a href="" class="btn border">
+                <a href="cart.php" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
                     <span class="badge"><?php echo $cont ?></span>
                 </a>
@@ -100,6 +100,7 @@ $cont=mysql_num_rows($result);
                         <?php
                         $res = mysql_query("select * from cart where cid='".$ur['id']."'");
                         $id = 1;
+                        $sum = 0;
                         while($row = mysql_fetch_array($res))
                         {    
                             $resu = mysql_query("select * from products where id='".$row['pid']."'");
@@ -125,19 +126,64 @@ $cont=mysql_num_rows($result);
                                     </div>
                                 </div>
                             </td>
-                            <td class="align-middle" id="row_total_<?php echo $row['id']; ?>">Rs. <?php echo $roww['dprise'];?></td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                            <td class="align-middle">Rs. <span  id="row_total_<?php echo $row['id']; ?>"><?php echo $roww['dprise'];?></span></td>
+                            <td class="align-middle"><button onclick=delete_item_<?php echo $row['id']; ?>() class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
                         </tr>
 
                         
     <script>
+        function delete_item_<?php echo $row['id']; ?>(){
+            
+            var id = <?php echo $row['id']; ?>;
+        	$.ajax({
+            type:'POST',
+            url:'../sqloperations/delete_cart.php',
+            data:{id:id
+        	},
+            success:function(return_data) {
+              if(return_data == "1"){
+                // alert('Someting went wrong!!!');
+              }  else{
+                // alert('Item Added Successfully');
+				window.location.href='cart.php'; 
+              } 
+            }
+          });
+        }
+
+
+
         function minus_<?php echo $row['id']; ?>(){
             var quan = 1-parseInt($('#quan_<?php echo $row['id']; ?>').val());
             var dprice = $('#dprice_<?php echo $row['id']; ?>').val();
             m_sum = quan*dprice*-1;
             // alert(m_sum);
-            document.getElementById("row_total_<?php echo $row['id']; ?>").innerHTML = "Rs. "+m_sum;
+            document.getElementById("row_total_<?php echo $row['id']; ?>").innerHTML = m_sum;
+            old_sum = parseInt(document.getElementById("total").innerHTML);
+            new_sum = old_sum - dprice;
+            document.getElementById("total").innerHTML = new_sum;
+            document.getElementById("f_total").innerHTML = new_sum+100;
+            
+            var id = <?php echo $row['id']; ?>;
+            if(quan<0){
+                quan=quan*-1;
+            }
 
+        	$.ajax({
+            type:'POST',
+            url:'../sqloperations/update_cart.php',
+            data:{id:id,
+        		quan:quan
+        	},
+            success:function(return_data) {
+            //   if(return_data == "1"){
+            //     alert('Someting went wrong!!!');
+            //   }  else{
+            //     alert('Item Added Successfully');
+			// 	// window.location.href='home.php'; 
+            //   } 
+            }
+          });
         }
 
         
@@ -146,10 +192,36 @@ $cont=mysql_num_rows($result);
             var dprice = $('#dprice_<?php echo $row['id']; ?>').val();
             sum = quan*dprice;
             // alert(sum);
-            document.getElementById("row_total_<?php echo $row['id']; ?>").innerHTML = "Rs. "+sum;
+            document.getElementById("row_total_<?php echo $row['id']; ?>").innerHTML = sum;
+            old_sum = parseInt(document.getElementById("total").innerHTML);
+            new_sum = parseInt(old_sum) + parseInt(dprice);
+            document.getElementById("total").innerHTML = new_sum;
+            document.getElementById("f_total").innerHTML = new_sum+ 100;
+            
+            var id = <?php echo $row['id']; ?>;
+            if(quan<0){
+                quan=quan*-1;
+            }
+
+            $.ajax({
+            type:'POST',
+            url:'../sqloperations/update_cart.php',
+            data:{id:id,
+                quan:quan
+            },
+            success:function(return_data) {
+            // if(return_data == "1"){
+            //     alert('Someting went wrong!!!');
+            // }  else{
+            //     alert('Item Added Successfully');
+            //     // window.location.href='home.php'; 
+            // } 
+            }
+            });
         }
     </script>
 <?php
+$sum = $sum + $roww['dprise'];
 $id++; }
 ?>
                     </tbody>
@@ -163,7 +235,7 @@ $id++; }
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3 pt-1">
                             <h6 class="font-weight-medium">Subtotal</h6>
-                            <h6 class="font-weight-medium" id="total">$150</h6>
+                            <h6 class="font-weight-medium">Rs. <span id="total"><?php echo $sum;?></span></h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Shipping</h6>
@@ -173,9 +245,9 @@ $id++; }
                     <div class="card-footer border-secondary bg-transparent">
                         <div class="d-flex justify-content-between mt-2">
                             <h5 class="font-weight-bold">Total</h5>
-                            <h5 class="font-weight-bold">$160</h5>
+                            <h5 class="font-weight-bold">Rs. <span id="f_total"><?php echo $sum + 100;?></span></h5>
                         </div>
-                        <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+                        <a href="checkout.php" class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</a>
                     </div>
                 </div>
             </div>
