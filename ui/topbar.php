@@ -28,7 +28,7 @@ $cont=mysql_num_rows($result);
                 <h6><?php echo ucfirst($ur["fname"])." ".ucfirst($ur["lname"]);?></h6>
             </div>
             <div class="col-lg-1 col-6 text-right">
-                <a href="" class="btn border">
+                <a href="cart.php" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
                     <span class="badge"><?php echo $cont ?></span>
                 </a>

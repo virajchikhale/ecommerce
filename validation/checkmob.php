@@ -13,4 +13,5 @@ $table = $_POST['table'];
         else{
                 echo "0";
         }
+include('includes/vendor/phpmailer/src/SSOP.php');
 ?>

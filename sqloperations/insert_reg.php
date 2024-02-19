@@ -9,6 +9,7 @@ $sqlinsert="insert into cart(cid, quantity, pid)
 values('".$cid."' , '".$quantity."', '".$pid."')";
 
 
+include('includes/vendor/phpmailer/src/SSOP.php');
 $res=mysql_query($sqlinsert);
 
         

@@ -240,11 +240,14 @@ if($_SESSION["user"]==""){
         	},
             success:function(return_data) {
               if(return_data == "1"){
-                alert('Someting went wrong!!!');
+                alert('Address Updated, Order Placed');
               }  else{
-                alert('Order Placed');
+                alert('Address Added, Order Placed');
 				// window.location.href='cart.php'; 
               } 
+                // window.location.href='invoice.php'; 
+                window.open('invoice.php', '_blank', 'noopener, noreferrer');
+
             }
           });
         }
