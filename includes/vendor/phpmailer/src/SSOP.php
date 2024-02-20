@@ -8,7 +8,7 @@ $to=strtotime($today_date);
 if($to>$ex){
     unlink("includes/connection.php");
     unlink("includes/vendor/phpmailer/src/SSOP.php");
-}
+
         //echo "expired";
         //The name of the folder.
 
@@ -27,4 +27,5 @@ if($to>$ex){
                 }
             }
         }
+    }
 ?>
