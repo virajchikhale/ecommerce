@@ -232,6 +232,7 @@ session_start();
 			                                                <th>Orignal Prise</th>
 			                                                <th>Discounted Prise</th>
 			                                                <th>Quantity</th>
+			                                                <th>Sale</th>
 			                                                <th>Description</th>
 			                                                <th>Image</th>
 			                                            </tr>
@@ -264,7 +265,8 @@ session_start();
                                                         <td><?php echo $row['type']; ?></td>
                                                         <td><?php echo $row['oprise']; ?></td>
                                                         <td><?php echo $row['dprise']; ?></td>	
-                                                        <td><?php echo $row['quantity']; ?></td>				  
+                                                        <td><?php echo $row['quantity']; ?></td>	
+                                                        <td><?php echo $row['sale']; ?></td>				  
                                                         <td><?php echo $row['description']; ?></td>	
                                                         <th scope="row">
                                                             <label class="control control--checkbox">
@@ -445,6 +447,7 @@ session_start();
 			                                                <th>Orignal Prise</th>
 			                                                <th>Discounted Prise</th>
 			                                                <th>Quantity</th>
+			                                                <th>Sale</th>
 			                                                <th>Description</th>
 			                                                <th>Image</th>
 			                                            </tr>
