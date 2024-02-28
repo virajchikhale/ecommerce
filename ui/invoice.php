@@ -178,6 +178,23 @@ if($_SESSION["user"]==""){
 </div>
 </div>
 <script>
+
+    
+var id = '<?php echo $ur['id']; ?>';
+$.ajax({
+                    type:'POST',
+                    url:'../sqloperations/empty_cart.php',
+                    data:{id:id
+                    },
+                    success:function(return_data) {
+                    // if(return_data == "1"){
+                    //     // alert('Address Updated, Order Placed1');
+                    // }  else{
+                    //     // alert('Address Added, Order Placed0');
+                    //     // window.location.href='cart.php'; 
+                    // } 
+                    }
+                });
 function hide() {
     
     var x = document.getElementById("print");

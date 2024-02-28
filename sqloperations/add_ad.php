@@ -10,7 +10,18 @@ $city=$_POST['city'];
 $code=$_POST['code'];
 
 
-$sqlinsert1="select * from address where cid = '".$id."' ";
+$sqlinsert111="select * from cart where cid = '".$id."'";
+$resss=mysql_query($sqlinsert111);
+$id = 1;
+while($row = mysql_fetch_array($resss))
+{    
+    $resu = mysql_query("Update products SET quantity = quantity-'".$row['quantity']."' where id='".$row['pid']."'");
+    $resu1 = mysql_query("Update products SET sale = sale+'".$row['quantity']."' where id='".$row['pid']."'");
+    $id++;
+}
+
+
+$sqlinsert1="select * from address where cid = '".$id."'";
 $count=mysql_num_rows(mysql_query($sqlinsert1));
 
 if ($count < 1){
