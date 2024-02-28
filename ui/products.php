@@ -206,7 +206,7 @@ if($_SESSION["user"]==""){
                                         <input type=hidden id="pro_id_<?php echo $row['id']; ?>" value="<?php echo $row['id']; ?>">
                                         <input type=hidden id="co_id_<?php echo $row['id']; ?>" value="<?php echo $ur['id']; ?>">
                                         <div class="card-footer d-flex justify-content-between bg-light border">
-                                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                                            <a target="_blank" href="detail.php?product_id=<?php echo $row['id']; ?>" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
                                             <a onclick=addtocart_<?php echo $row['id']; ?>() class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                                         </div>
                                     </div>
