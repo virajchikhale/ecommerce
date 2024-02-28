@@ -68,8 +68,7 @@ session_start();
 
 					<div class="flex-col-c p-t-55">
 						<a href="../farmer1/reg" class="txt2">
-</p><p>Sign Up For 
-							Farmer
+</p>Sign Up For merchant<p>
 						</a>
 					</div>
 				</form>
