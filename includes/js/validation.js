@@ -58,6 +58,6 @@ function disable() {
     x.style.display = "none";
 
     
-    var y = document.getElementById("otppp");
-    y.style.display = "none ";
+    var x = document.getElementById("box");
+    x.style.display = "none";
 }

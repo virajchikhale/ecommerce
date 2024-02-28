@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Cart Login</title>
+	<title> Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -67,7 +67,7 @@ session_start();
 					</div>
 
 					<div class="flex-col-c p-t-55">
-						<a href="../farmer1/reg" class="txt2">
+						<a href="reg.php" class="txt2">
 </p>Sign Up For merchant<p>
 						</a>
 					</div>

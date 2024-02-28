@@ -1,7 +1,7 @@
 <?php
 include("../includes/connection.php");
 //error_reporting('E_ALL');
-$mob = $_POST['phone'];
+$mob = $_POST['mob'];
 $table = $_POST['table'];
 
         $sql="SELECT * from $table where phone='".$mob."'";
