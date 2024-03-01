@@ -34,7 +34,7 @@
                 <p class="mb-md-0 text-center text-md-left text-dark">
                     &copy; <a class="text-dark font-weight-semi-bold" href="#">2024</a>. All Rights Reserved. Designed
                     by
-                    <a class="text-dark font-weight-semi-bold" href="https://codelikho.in">CodeLikh</a>
+                    <a class="text-dark font-weight-semi-bold" href="https://codelikho.in">CodeLikho</a>
                 </p>
             </div>
         </div>
