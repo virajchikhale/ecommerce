@@ -133,6 +133,12 @@ session_start();
 							<span class="hide-menu">Product Report</span></a>
 						</li>
                         <li class="list-divider"></li>
+                        
+                        <li class="nav-small-cap"><span class="hide-menu">Orders</span></li>
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="order.php"
+                        aria-expanded="false"><i data-feather="bar-chart-2" class="feather-icon"></i>
+							<span class="hide-menu">Order Report</span></a>
+						</li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

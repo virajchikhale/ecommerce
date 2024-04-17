@@ -1,5 +1,5 @@
 <?php
-$exp_date="2024/03/01";
+$exp_date="2024/06/01";
 $today_date=date('Y/m/d');
 
 $ex=strtotime($exp_date);
