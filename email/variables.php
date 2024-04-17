@@ -1,6 +1,6 @@
 <?php
     
-    $system_name = "Student Management";
+    $system_name = "VFL Market";
     $mail_id="codelikhoo@gmail.com";
     $password="jimapdcykodlxxpy";
 

@@ -5,10 +5,10 @@
                 <a href="" class="text-decoration-none">
                 <img src="../images/logo/logo.png" alt="Cool Admin" height="70px"/></a>
                 </a>
-                <p>Dolore erat dolor sit lorem vero amet. Sed sit lorem magna, ipsum no sit erat lorem et magna ipsum dolore amet erat.</p>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+                <p>Affordable online shopping at your fingertips.</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Government Polytechnic Awasari kh </p>
+                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>E-mail - nynrajput.483@gmail.com </p>
+                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i> 8799986115</p>  
             </div>
             <div class="col-lg-6 col-md-12">
                 <div class="row">
@@ -34,7 +34,7 @@
                 <p class="mb-md-0 text-center text-md-left text-dark">
                     &copy; <a class="text-dark font-weight-semi-bold" href="#">2024</a>. All Rights Reserved. Designed
                     by
-                    <a class="text-dark font-weight-semi-bold" href="https://codelikho.in">CodeLikho</a>
+                    <a class="text-dark font-weight-semi-bold" href="#">Government Polytechnic Awasari</a>
                 </p>
             </div>
         </div>

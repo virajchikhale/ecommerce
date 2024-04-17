@@ -19,6 +19,11 @@ $cont=mysql_num_rows($result);
                             <span class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>
                             </span>
+                <a href="history.php" class="btn border">
+                            <span class="input-group-text bg-transparent text-primary">
+                                <i class="fa fa-history"></i>
+                            </span>
+                </a>
                         </div>
                     </div>
                 </form>

@@ -45,7 +45,7 @@ if($_SESSION["user"]==""){
                         <!-- col-lg-6 start here -->
                         <div class="invoice-from">
                             <ul class="list-unstyled text-right">
-                                <li>E shopper</li>
+                                <li>VFL Market</li>
                                 <li>IT Department</li>
                                 <li>Goverment Polytechnic Awasari Kd</li>
                                 <li>Maharashtra 410503, India</li>

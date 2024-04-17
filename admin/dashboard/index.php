@@ -89,21 +89,6 @@ session_start();
                 <!-- ============================================================== -->
                 <!-- End Logo -->
                 <!-- ============================================================== -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
-                        <!-- ============================================================== -->
-                        <!-- create new -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="docs.html" role="button">
-                                Documentation
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </nav>
         </header>
         <!-- ============================================================== -->
@@ -408,7 +393,7 @@ session_start();
                                                             {		 
                                                                 $que = "delete from products where id = '".$row['id']."' ";
                                                                 mysql_query($que);
-                                                                echo '<script>window.location.href="pro_report.php";</script>';
+                                                                echo '<script>window.location.href="index.php";</script>';
                                                             }
 
                                                         $id++; }
@@ -439,7 +424,7 @@ session_start();
                                                         $que="Insert into products(name, img,category, type, oprise, dprise, description, quantity, aid) values('".$name."' , '".$img."', '".$category."', '".$type."', '".$oprise."', '".$dprise."', '".$description."', '".$quantity."','".$ur['id']."')";
                                                         mysql_query($que);
                                                         echo "<script> alert('Product data updated Successfully....');</script>";
-                                                        echo '<script>window.location.href="my-products.php";</script>';
+                                                        echo '<script>window.location.href="index.php";</script>';
                                                     }
                                                         ?>
 			                                        </tbody>

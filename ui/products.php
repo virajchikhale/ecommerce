@@ -191,6 +191,7 @@ if($_SESSION["user"]==""){
                             $id = 1;
                             while($row = mysql_fetch_array($res))
                             {
+                                $discount=($row['oprise']-$row['dprise'])/$row['oprise']*100; 
                         ?>
                                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                                     <div class="card product-item border-0 mb-4">
@@ -200,7 +201,7 @@ if($_SESSION["user"]==""){
                                         <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                                             <h6 class="text-truncate mb-3"><?php echo $row['name']; ?></h6>
                                             <div class="d-flex justify-content-center">
-                                                <h6><?php echo $row['dprise']; ?></h6><h6 class="text-muted ml-2"><del><?php echo $row['oprise']; ?></del></h6>
+                                                <h6><?php echo $row['dprise']; ?></h6><h6 class="text-muted ml-2"><del><?php echo $row['oprise']; ?></del>(<?php echo round($discount); ?>% off)</h6>
                                             </div>
                                         </div>
                                         <input type=hidden id="pro_id_<?php echo $row['id']; ?>" value="<?php echo $row['id']; ?>">
