@@ -124,6 +124,10 @@ session_start();
                         aria-expanded="false"><i data-feather="bar-chart-2" class="feather-icon"></i>
 							<span class="hide-menu">Order Report</span></a>
 						</li>
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="completed_order.php"
+                        aria-expanded="false"><i data-feather="bar-chart-2" class="feather-icon"></i>
+							<span class="hide-menu">Completed Order Report</span></a>
+						</li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

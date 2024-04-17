@@ -22,9 +22,12 @@ $oid = $_GET["oid"];
 <body>
 <?php
     include ('../../includes/connection.php');	
+    $sqll = "update `order` set status = '1' where id='".$oid."'";
+    mysql_query($sqll);
     $sql = "select * from `order` where id='".$oid."'";
     $ur = mysql_fetch_array(mysql_query($sql));
-    $sql1 = "select * from `address` where cid='".$ur["id"]."'";
+    $sql1 = "select * from `address` where cid='".$ur["cid"]."'";
+    // echo $sql;
     $ad = mysql_fetch_array(mysql_query($sql1));
 	
 	?>
@@ -46,7 +49,7 @@ $oid = $_GET["oid"];
                         <!-- col-lg-6 start here -->
                         <div class="invoice-from">
                             <ul class="list-unstyled text-right">
-                                <li>E shopper</li>
+                                <li>VFL Market</li>
                                 <li>IT Department</li>
                                 <li>Goverment Polytechnic Awasari Kd</li>
                                 <li>Maharashtra 410503, India</li>
@@ -93,7 +96,7 @@ $oid = $_GET["oid"];
                                     </thead>
                                     <tbody>
                                     <?php
-                $res = mysql_query("select * from `cart` where cid='".$ur['id']."'");
+                $res = mysql_query("select * from `order` where id='".$ur['id']."'");
                 $sr = 1;
                 $total = 0;
                 $subtotal_total = 0;

@@ -125,7 +125,7 @@ session_start();
 							<span class="hide-menu">Order Report</span></a>
 						</li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="completed_order.php"
-                        aria-expanded="false"><i data-feather="bar-chart-2" class="feather-icon"></i>
+                            aria-expanded="false"><i data-feather="bar-chart-2" class="feather-icon"></i>
 							<span class="hide-menu">Completed Order Report</span></a>
 						</li>
                     </ul>
@@ -179,7 +179,6 @@ session_start();
 			                                    <table id="zero_config" class="table table-striped table-bordered no-wrap">
 			                                        <thead>
 			                                            <tr>
-			                                                <th>Action</th>
 			                                                <th>ID</th>
 			                                                <th>PID</th>
 			                                                <th>Product Name</th>
@@ -193,7 +192,7 @@ session_start();
                                                         <?php
                                                                     include ('../../includes/connection.php');
                                                                     $ur = mysql_fetch_array(mysql_query("select * from admin_reg where email='".$_SESSION["user"]."'"));
-                                                                    $res = mysql_query("select * from `order` where status != '2'");
+                                                                    $res = mysql_query("select * from `order` where status = '2'");
                                                                     $id = 1;
                                                                     while($row = mysql_fetch_array($res))
                                                                     { 
@@ -202,16 +201,6 @@ session_start();
                                                                 ?>
 			                                            <tr>
                                                         
-                                                        <th scope="row">
-                                                            <label class="control control--checkbox">
-                                                                <?php if($row['status']==0){?>
-                                                                <a class="btn btn-sm btn-info" target="_blank" href="invoice.php?oid=<?php echo $row['id'];?>" style="color:rgb(10,10,10)">Pack</a>
-                                                               <?php } else {?>
-                                                                <a class="btn btn-sm btn-success" href="delivered.php?oid=<?php echo $row['id'];?>" style="color:rgb(10,10,10)">Delivered</a>
-                                                                <?php } ?>
-                                                                <div class="control__indicator"></div>
-                                                            </label>
-                                                        </th>
                                                             <td><?php echo $id;?></td>
                                                             <td><?php echo $row['pid']; ?></td>
                                                             <td><?php echo $roww['name']; ?></td>
@@ -227,7 +216,6 @@ session_start();
 			                                        </tbody>
 			                                        <tfoot>
 			                                            <tr>
-			                                                <th>Action</th>
 			                                                <th>ID</th>
 			                                                <th>PID</th>
 			                                                <th>Product Name</th>
